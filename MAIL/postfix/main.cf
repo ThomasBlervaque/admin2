@@ -23,8 +23,8 @@ compatibility_level = 2
 
 # TLS parameters
 smtpd_use_tls = yes
-smtpd_tls_cert_file=/etc/letsencrypt/live/mail.l1-2.ephec-ti.be/fullchain.pem
-smtpd_tls_key_file=/etc/letsencrypt/live/mail.l1-2.ephec-ti.be/privkey.pem
+smtpd_tls_cert_file=/etc/letsencrypt/live/mail.mmes-3.ephec-ti.be/fullchain.pem
+smtpd_tls_key_file=/etc/letsencrypt/live/mail.mmes-3.ephec-ti.be/privkey.pem
 smtpd_tls_security_level=may
 smtpd_tls_loglevel=1
 smtpd_tls_session_cache_database = btree:${data_directory}/smtpd_scache
@@ -42,8 +42,8 @@ smtp_tls_protocols = !SSLv2, !SSLv3, !TLSv1, !TLSv1.1
 smtpd_relay_restrictions = permit_mynetworks permit_sasl_authenticated defer_unauth_destination
 
 
-myhostname = mail.l1-7.ephec-ti.be
-mydomain = l1-7.ephec-ti.be
+myhostname = mail.mmes-3.ephec-ti.be
+mydomain = mmes-3.ephec-ti.be
 alias_maps = hash:/etc/aliases
 alias_database = hash:/etc/aliases
 myorigin = $mydomain
