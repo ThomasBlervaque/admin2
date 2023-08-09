@@ -8,12 +8,12 @@ RUN apt-get upgrade -y
 ###########
 
 # add hostname for mail recepient
-RUN RUN echo mail.l1-7.ephec-ti.be > /etc/hostname
+RUN echo mail.mmes-3.ephec-ti.be > /etc/hostname
 ADD /config/etc-hosts.txt /etc/hosts
 
 # preconfigure postfix 
 RUN echo "postfix postfix/mail_mailer_type string Internet site" >> preseed.txt
-RUN echo "postfix postfix/mailname string l1-2.ephec-ti.be" >> preseed.txt
+RUN echo "postfix postfix/mailname string mmes-3.ephec-ti.be" >> preseed.txt
 
 # use mailbox format
 RUN debconf-set-selections preseed.txt
@@ -31,7 +31,7 @@ ADD /config/etc-aliases.txt /etc/aliases
 RUN chown root:root /etc/aliases
 RUN newaliases
 
-EXPOSE 25
+EXPOSE 25 143
 
 ###########
 # DOVECOT #
@@ -47,3 +47,8 @@ RUN adduser dovecot mail
 
 RUN mkdir -p /etc/systemd/system/dovecot.service.d/
 RUN cp /config/restart.conf /etc/systemd/system/dovecot.service.d/
+
+##########
+# LAUNCH #
+##########
+CMD ["sh", "-c", "service postfix start && service dovecot start && tail -f /dev/null"]
