@@ -1,0 +1,36 @@
+$TTL 604800
+$ORIGIN mmes-3.ephec-ti.be.
+@       IN      SOA     ns.mmes-3.ephec-ti.be. hostmaster.mmes-3.ephec-ti.be. (
+                                1          ; serial
+                                3600       ; refresh
+                                3000       ; retry
+                                4619200    ; expire
+                                604800     ; minimum
+                                )
+
+; name serveur record
+@       IN      NS      ns.mmes-3.ephec-ti.be.
+@       IN      MX  10  mail
+;ressource record
+@       IN      A       51.91.248.16
+ns      IN      A       51.91.248.16
+; service web
+www     IN      A       51.91.248.16
+b2b     IN      A       51.91.248.16
+; service mail
+mail      IN      A        141.94.20.8
+
+mail._domainkey.mmes-3.ephec-ti.be.     3600 TXT (
+  "v=DKIM1; p="
+  "MIGfMA0GCSqGSIb3DQEBAQUAA4GNADCBiQKBgQC4sRE8nM2b6v0/4ZpTxeM3gPOx"
+  "ON7NNW0qdJJ7aRHJaR8xJgXY7ahO+nTJIsKeWOtlxTjCorxoZxA+REmdPBEA8j31"
+  "U5aoY03eZUwN/dbWum1mE0igmRWz37i8bLs4t5VQtfdjIK30ZoDUv/WHiqUF8rUd"
+  "4Zo1aOi8YR60mgsmkQIDAQAB")
+
+
+_dmarc      IN      TXT     "v=DMARC1; p=reject; pct=100; aspf=s; rua=mailto:thomas@mmes-3.ephec-ti.be"
+
+@       IN      TXT      "v=spf1 ip4:141.94.20.8 ip4:172.17.0.1 ip4:51.91.248.16 -all"
+
+$INCLUDE "Kmmes-3.ephec-ti.be.+008+00179.key";
+$INCLUDE "Kmmes-3.ephec-ti.be.+008+60841.key";

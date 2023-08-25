@@ -1,0 +1,49 @@
+version: '2'
+
+services:
+  resolver:
+    build:
+      context: ./resolver
+      dockerfile: Dockerfile
+    networks:
+      local:
+        ipv4_address: 172.16.1.3
+    volumes:
+      - ./resolver/named.conf:/etc/bind/named.conf
+    container_name: resolver
+
+  soa-in:
+    build:
+      context: ./soa
+      dockerfile: Dockerfile
+    networks:
+      local:
+        ipv4_address: 172.16.1.2
+    volumes:
+      - ./soa/named.conf:/etc/bind/named.conf
+      - ./soa/mmes-3.zone:/etc/bind/mmes-3.zone
+    container_name: soa-in
+    dns:
+      - 172.16.1.2
+
+  web-in:
+    build:
+      context: ./web
+      dockerfile: Dockerfile
+    networks:
+      local:
+        ipv4_address: 172.16.1.4
+    volumes:
+      - ./web/index.html /var/www/html/
+      - ./web/intranet.conf /etc/apache2/sites-available/000-default.conf
+    container_name: web-in
+    dns:
+      - 172.16.1.2
+
+networks:
+  local:
+      ipam:
+          driver: default
+          config:
+              - subnet: 172.16.1.0/24
+                gateway: 172.16.1.1
