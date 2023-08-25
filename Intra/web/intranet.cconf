@@ -1,6 +1,0 @@
-<VirtualHost *:80>
-        ServerAdmin simon.kinet@gmail.com
-        DocumentRoot /var/www/html
-        ServerName www.intra.mmes-3.ephec-ti.be
-        AddDefaultCharset UTF-8
-</VirtualHost>
